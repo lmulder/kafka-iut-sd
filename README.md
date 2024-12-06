@@ -12,3 +12,4 @@ helm install kafka oci://registry-1.docker.io/bitnamicharts/kafka
 cd kubernetes
 oc apply -f client-properties.yaml
 oc apply -f kafka-client.yaml# kafka-iut-sd
+oc get pods
