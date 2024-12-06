@@ -1,0 +1,59 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kafka-client
+  labels:
+    app: kafka-client
+    app.kubernetes.io/component: kafka-client
+    app.kubernetes.io/instance: kafka-client
+    app.kubernetes.io/name: kafka-client
+    app.kubernetes.io/part-of: kafka
+    app.openshift.io/runtime: amq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-client
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kafka-client
+        deployment: kafka-client
+    spec:
+      volumes:
+        - name: client-properties
+          configMap:
+            name: client-properties
+            items:
+              - key: client.properties
+                path: client.properties
+            defaultMode: 420
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: kafka-client
+          command:
+            - sleep
+            - infinity
+          ports:
+            - containerPort: 9092
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: client-properties
+              mountPath: /tmp
+          terminationMessagePolicy: File
+          image: 'docker.io/bitnami/kafka:3.9.0-debian-12-r1'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
