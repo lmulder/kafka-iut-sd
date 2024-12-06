@@ -2,7 +2,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: client-properties
-  immutable: false
 data:
   client.properties: |-
     security.protocol=SASL_PLAINTEXT
