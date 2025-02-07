@@ -1,0 +1,16 @@
+[Unit]
+Description=Apache Kafka server (broker)
+Documentation=http://kafka.apache.org/documentation.html
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/sh -c '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/kraft/server.properties > /opt/kafka/kafka.log 2>&1'
+ExecStop=/bin/sh -c '/opt/kafka/bin/kafka-server-stop.sh > /opt/kafka/kafka.log 2>&1'
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+
