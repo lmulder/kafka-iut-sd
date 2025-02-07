@@ -7,13 +7,19 @@
 
 ## Procédure d'installation de Kafka
 1. Passage en root
+```bash
 sudo -s
+```
 
 2. Update
+```bash
 apt update
+```
 
 3. Installation de Java
+```bash
 sudo apt install default-jdk wget
+```
 
 4. Téléchargement de la dernière version de Kafka
 ```bash
