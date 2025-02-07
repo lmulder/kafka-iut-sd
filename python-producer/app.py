@@ -2,7 +2,7 @@ from kafka import KafkaProducer
 import json
 
 # Define the Kafka broker and topic
-broker = 'kafka.local:9092'
+broker = '{RPI_IP}}:9092'
 topic = 'my-first-topic'
 
 # Create a Kafka producer
@@ -19,7 +19,8 @@ producer = KafkaProducer(
 )
 # Define the message to send
 message = {
-    'key': 'salle28',
+    'key': 'this-is-a-key',
+    'value' 'this-is-a-value'
 }
 
 # Send the message to the Kafka topic

@@ -1,25 +1,25 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: kafka-client
+  name: my-kafka-client
   labels:
-    app: kafka-client
-    app.kubernetes.io/component: kafka-client
-    app.kubernetes.io/instance: kafka-client
-    app.kubernetes.io/name: kafka-client
+    app: my-kafka-client
+    app.kubernetes.io/component: my-kafka-client
+    app.kubernetes.io/instance: my-kafka-client
+    app.kubernetes.io/name: my-kafka-client
     app.kubernetes.io/part-of: kafka
     app.openshift.io/runtime: amq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kafka-client
+      app: my-kafka-client
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: kafka-client
-        deployment: kafka-client
+        app: my-kafka-client
+        deployment: my-kafka-client
     spec:
       volumes:
         - name: client-properties
@@ -44,7 +44,7 @@ spec:
             - name: client-properties
               mountPath: /tmp
           terminationMessagePolicy: File
-          image: 'docker.io/bitnami/kafka:3.9.0-debian-12-r1'
+          image: 'docker.io/bitnami/kafka:3.9.0-debian-12-r4'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst

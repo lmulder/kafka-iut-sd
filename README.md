@@ -1,5 +1,9 @@
 # kafka-iut-sd
 
+## Pré-requis
+* Création d'un compte Red Hat Developers depuis developers.redhat.com
+* Accès à la Developer Sandbox OpenShift. Le namespace utilisateur créé sera noté {user-namespace-dev}
+
 ## Installation de Kafka
 * Ouvrir un terminal depuis la console OpenShift
 * Lancer la commande suivante :
@@ -7,8 +11,10 @@
 helm install my-kafka oci://registry-1.docker.io/bitnamicharts/kafka
 ```
 ## Récupération du mot de passe pour le user1
-oc get secret my-kafka-user-passwords --namespace loic-mulder-dev -o jsonpath='{.data.client-passwords}' | base64 -d | cut -d , -f 1
+```bash
+oc get secret my-kafka-user-passwords --namespace {user-namespace-dev} -o jsonpath='{.data.client-passwords}' | base64 -d | cut -d , -f 1
 Modifier le contenu du mot de passe "changeme" dans le fichier kubernetes/client-properties.yaml
+```
 
 ## Installation d'un client Kafka
 ```bash
@@ -31,7 +37,7 @@ Connecté au pod kafka-client
 ```bash
 kafka-console-producer.sh \
             --producer.config /tmp/client.properties \
-            --bootstrap-server my-kafka.loic-mulder-dev.svc.cluster.local:9092 \
+            --bootstrap-server my-kafka.{user-namespace-dev}.svc.cluster.local:9092 \
             --topic my-first-topic
 >
 ```
@@ -43,7 +49,7 @@ Connecté au pod kafka-client
 ```bash
 kafka-console-consumer.sh \
             --consumer.config /tmp/client.properties \
-            --bootstrap-server my-kafka.loic-mulder-dev.svc.cluster.local:9092 \
+            --bootstrap-server my-kafka.{user-namespace-dev}.svc.cluster.local:9092 \
             --topic my-first-topic \
             --from-beginning
 ```

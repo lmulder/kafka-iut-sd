@@ -9,4 +9,4 @@ data:
     sasl.mechanism=SCRAM-SHA-256
     sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required \
         username="user1" \
-        password="FHp2sfyGox";
+        password="changeme";
