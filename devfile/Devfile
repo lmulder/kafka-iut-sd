@@ -12,6 +12,9 @@ metadata:
   language: Python
   provider: Red Hat
   version: 2.2.0
+  git:
+      remotes:
+        origin: https://github.com/devfile-samples/python-ex
 components:
   - name: py
     container:
