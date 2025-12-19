@@ -3,11 +3,15 @@
 ## Pré-requis
 * Création d'un compte Red Hat Developers depuis developers.redhat.com
 * Accès à la Developer Sandbox OpenShift. Le namespace utilisateur créé sera noté {user-namespace-dev}
+* Télécharger les outils ligne de commande "oc" et "helm" depuis le menu Aide de la console OpenShift
+* Dézipper et placer les .exe dans le dossier Downloads
 
 ## Installation de Kafka
-* Ouvrir un terminal depuis la console OpenShift
+* Ouvrir le Terminal Windows, se placer dans le répertoire Downloads
+* Récupérer la commande de connexion depuis le menu profil de la console OpenShift
 * Lancer la commande suivante :
 ```bash
+oc login .......
 helm install my-kafka oci://registry-1.docker.io/bitnamicharts/kafka
 ```
 ## Récupération du mot de passe pour le user1
