@@ -12,7 +12,8 @@
 * Lancer la commande suivante :
 ```bash
 oc login .......
-helm install my-kafka oci://registry-1.docker.io/bitnamicharts/kafka
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-kafka bitnami/kafka --set image.repository=bitnamilegacy/kafka
 ```
 ## Récupération du mot de passe pour le user1
 ```bash
