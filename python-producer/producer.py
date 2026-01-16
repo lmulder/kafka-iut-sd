@@ -5,7 +5,7 @@ import json
 
 # Define the Kafka broker and topic
 broker = 'kafka.loic-mulder-dev.svc.cluster.local:9092'
-topic = 'my-first-topic'
+topic = 'partitionned'
 
 # Create a Kafka producer
 producer = KafkaProducer(
@@ -29,7 +29,7 @@ while True:
     }
 
     # Send the message to the Kafka topic
-    producer.send(topic, partition=0, value=message)
+    producer.send(topic, value=message)
 
     # Ensure all messages are sent before closing the producer
     producer.flush()
