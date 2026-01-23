@@ -1,0 +1,60 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: debezium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debezium
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: debezium
+    spec:
+      containers:
+        - name: container
+          image: quay.io/debezium/connect
+          ports:
+            - containerPort: 8083
+              protocol: TCP
+          env:
+            - name: GROUP_ID
+              value: '1'
+            - name: STATUS_STORAGE_TOPIC
+              value: my_connect_statuses
+            - name: OFFSET_STORAGE_TOPIC
+              value: my_connect_offsets
+            - name: CONFIG_STORAGE_TOPIC
+              value: my_connect_configs
+            - name: BOOTSTRAP_SERVERS
+              value: 'my-kafka.changeme-dev.svc.cluster.local:9092'
+            - name: CONNECT_SECURITY_PROTOCOL
+              value: SASL_PLAINTEXT
+            - name: CONNECT_SASL_MECHANISM
+              value: SCRAM-SHA-256
+            - name: CONNECT_SASL_JAAS_CONFIG
+              value: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="changeme";
+          resources:
+            limits:
+              cpu: '2'
+              memory: 2Gi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
