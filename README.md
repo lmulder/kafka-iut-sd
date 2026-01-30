@@ -59,5 +59,15 @@ kafka-console-consumer.sh \
             --from-beginning
 ```
 
+## Administatration des topics
+Connecté au pod kafka-client
+### Listing des topics
+```bash
+kafka-topics.sh \
+            --command-config /tmp/client.properties \
+            --bootstrap-server my-kafka.{user-namespace-dev}.svc.cluster.local:9092 \
+            --list
+```
+
 
 

@@ -36,6 +36,18 @@ spec:
               value: SCRAM-SHA-256
             - name: CONNECT_SASL_JAAS_CONFIG
               value: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="changeme";
+            - name: CONNECT_PRODUCER_SECURITY_PROTOCOL
+              value: SASL_PLAINTEXT
+            - name: CONNECT_PRODUCER_SASL_MECHANISM
+              value: SCRAM-SHA-256
+            - name: CONNECT_PRODUCER_SASL_JAAS_CONFIG
+              value: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="changeme";
+            - name: CONNECT_CONSUMER_SECURITY_PROTOCOL
+              value: SASL_PLAINTEXT
+            - name: CONNECT_CONSUMER_SASL_MECHANISM
+              value: SCRAM-SHA-256
+            - name: CONNECT_CONSUMER_SASL_JAAS_CONFIG
+              value: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="changeme";
           resources:
             limits:
               cpu: '2'
