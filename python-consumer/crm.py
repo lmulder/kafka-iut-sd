@@ -35,7 +35,7 @@ except Exception as e:
     exit(1)
 
 print(f"Connection to DB server at {db_host}:{db_port}")
-# connect to a MariaDB database
+# connect to a MySQL/MariaDB database
 try:
     conn = mysql.connector.connect(
         user=db_user,
