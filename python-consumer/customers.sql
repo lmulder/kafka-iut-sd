@@ -1,5 +1,5 @@
 CREATE TABLE customers (
-    id UUID PRIMARY KEY,
+    id VARCHAR(36) PRIMARY KEY,
     source_id INT UNIQUE,
     first_name TEXT,
     last_name TEXT,
